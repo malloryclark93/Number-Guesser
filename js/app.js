@@ -32,6 +32,16 @@ const game = document.querySelector('#game'),
           setMessage(`Please Enter A Number Between ${min} and ${max}`, `red`);
 
         }
+        // Check if won
+        if(guess === winningNum){
+        // Disable input
+          guessInput.disabled = true;
+        // Changer border color
+        guessInput.style.borderColor = 'green';
+        // Set message if they won
+        setMessage(`${winningNum} is correct, YOU WIN : )`, 'green');
+       
+      }
 
       });
 
