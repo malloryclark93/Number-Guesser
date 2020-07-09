@@ -34,6 +34,7 @@ const game = document.querySelector('#game'),
         }
         // Check if won
         if(guess === winningNum){
+        // Game over - won
         // Disable input
           guessInput.disabled = true;
         // Changer border color
@@ -41,7 +42,27 @@ const game = document.querySelector('#game'),
         // Set message if they won
         setMessage(`${winningNum} is correct, YOU WIN : )`, 'green');
        
-      }
+      } else {
+        // Wrong number 
+        guessesLeft -= 1;
+        // ^^ same as guessesLeft = guessesLeft -1;
+        if(guessesLeft === 0){
+        // Game over - lost
+
+        // Game continues - answer wrong
+        guessInput.disabled = true;
+        // Changer border color
+        guessInput.style.borderColor = 'red';
+        // Set message if they won
+        setMessage(`Game over, you lost. The correct number was   
+        ${winningNum}`, 'red');
+        } else {
+          // Game continues - answer wrong
+          setMessage(`${guess} is not correct, ${guessesLeft} guesses left`);
+
+        }
+
+        }
 
       });
 
