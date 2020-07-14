@@ -29,18 +29,13 @@ const game = document.querySelector('#game'),
           console.log(guess);
         // Validate our input
         if(isNaN(guess) || guess < min || guess > max){
-          setMessage(`Please Enter A Number Between ${min} and ${max}`, `red`);
+          setMessage(`Please Enter A Number Between ${min} and ${max}`, 'red');
 
         }
         // Check if won
         if(guess === winningNum){
-        // Game over - won
-        // Disable input
-          guessInput.disabled = true;
-        // Changer border color
-        guessInput.style.borderColor = 'green';
-        // Set message if they won
-        setMessage(`${winningNum} is correct, YOU WIN : )`, 'green');
+        
+          gameOver(true, `${winningNum} is correct, YOU WIN : )`);
        
       } else {
         // Wrong number 
@@ -49,22 +44,39 @@ const game = document.querySelector('#game'),
         if(guessesLeft === 0){
         // Game over - lost
 
-        // Game continues - answer wrong
-        guessInput.disabled = true;
-        // Changer border color
-        guessInput.style.borderColor = 'red';
-        // Set message if they won
-        setMessage(`Game over, you lost. The correct number was   
-        ${winningNum}`, 'red');
-        } else {
-          // Game continues - answer wrong
-          setMessage(`${guess} is not correct, ${guessesLeft} guesses left`);
+          gameOver(false, `Game over, you lost. The correct number was ${winningNum}`);
 
-        }
+        } else {
+        // Changer border color
+          guessInput.style.borderColor = 'red';
+
+          // Clear input
+          guessInput.value = '';
+
+          // Game continues - answer wrong
+          setMessage(`${guess} is not correct, ${guessesLeft} guesses left`, 'red');
+
+          }
 
         }
 
       });
+
+       // Game over 
+       function gameOver(won, msg){
+        let color;
+        won === true ? color = 'green' : color = 'red'; 
+        
+        guessInput.disabled = true;
+        // Changer border color
+         guessInput.style.borderColor = color;
+        // Set text color
+         message.style.color = color;
+       
+         // Set message if they won
+         setMessage(msg);
+
+       }
 
       // Set message
       function setMessage(msg, color){
