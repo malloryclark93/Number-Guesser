@@ -76,6 +76,9 @@ const game = document.querySelector('#game'),
          // Set message if they won
          setMessage(msg);
 
+         // Play again 
+        guessBtn.value = 'Play Again';
+        guessBtn.className += 'play-again';
        }
 
       // Set message
